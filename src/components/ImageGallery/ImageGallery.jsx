@@ -116,8 +116,15 @@ export class ImageGallery extends Component {
   //! Кликаем в картинку, ищем её largeImageURL, откываем МОДАЛКУ с картинкой
   handleBackdropClick1 = event => {
     this.toggleModal()
-    const i = this.state.hits.findIndex(hit => hit.webformatURL === event.target.src)
-    this.image.largeURL = this.state.hits[i].largeImageURL
+    this.image.largeURL = "";
+    this.image.webURL = event.target.src  //!!! 
+    console.log(this.image.webURL); //!!! 
+    //!!! 
+    if (this.image.webURL !== undefined) { 
+    const i = this.state.hits.findIndex(hit => hit.webformatURL === this.image.webURL)
+      this.image.largeURL = this.state.hits[i].largeImageURL;
+      // this.image.webURL = "";
+      } else return
   };
 
 
@@ -125,6 +132,8 @@ export class ImageGallery extends Component {
 //* ================================ RENDER ==========================================================
   render() {
     const { hits, isLoading, showModal, showButton } = this.state
+    console.log("this.image.webURL: ", this.image.webURL);
+    console.log("this.image.largeURL: ", this.image.largeURL);
 
 
     return (
@@ -151,8 +160,7 @@ export class ImageGallery extends Component {
         {(hits[0] !== undefined && showButton) && <Button onClick={this.loadMore} />}
         
 
-        
-        {showModal && (
+        {(showModal && this.image.webURL) && (
           <Modal onClose={this.toggleModal}>
             <img
               src={this.image.largeURL}
