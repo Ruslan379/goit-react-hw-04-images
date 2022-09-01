@@ -9,7 +9,6 @@ import { Loader } from 'components/Loader/Loader';
 import { Button } from 'components/Button/Button';
 import { Modal } from 'components/Modal/Modal';
 
-
 import css from 'components/ImageGallery/ImageGallery.module.css' //todo = старый вариант импорта стилей
 
 
@@ -125,6 +124,7 @@ export class ImageGallery extends Component {
   render() {
     const { hits, isLoading, showModal, showButton } = this.state
 
+
     return (
       < >
         {(hits[0] === undefined && isLoading === false) && (
@@ -140,9 +140,7 @@ export class ImageGallery extends Component {
           onClick={this.handleBackdropClick1}
         >
           <ImageGalleryItem hits={hits} />
-
         </ul>
-
 
         {isLoading && <Loader />}
 
