@@ -27,10 +27,7 @@ export class ImageGallery extends Component {
 
 
   //! для поиска largeImageURL
-  image = {
-    webURL: "",
-    largeURL: "",
-  }
+  largeURL = "";
 
 
 //* ================================ МЕТОДЫ ==========================================================
@@ -52,7 +49,7 @@ export class ImageGallery extends Component {
     ) {
       this.setState({ isLoading: true }); 
       //! Делаем fetch-запрос с помощью services/pixabay-api.js
-      setTimeout(() => {
+      setTimeout(() => { 
       pixabayAPI
         .fetchPixabay(this.state.query, this.state.page)
 
@@ -87,7 +84,7 @@ export class ImageGallery extends Component {
           // alert(error);
           toast.error(`Ошибка запроса: ${error}`, { position: "top-left", autoClose: 2000 } ); 
         });
-      }, 1000);
+      }, 500); 
       //! Передача пропса this.state в App
       // this.props.onSubmit(this.state); 
     }
@@ -115,16 +112,11 @@ export class ImageGallery extends Component {
 
   //! Кликаем в картинку, ищем её largeImageURL, откываем МОДАЛКУ с картинкой
   handleBackdropClick1 = event => {
-    this.toggleModal()
-    this.image.largeURL = "";
-    this.image.webURL = event.target.src  //!!! 
-    console.log(this.image.webURL); //!!! 
-    //!!! 
-    if (this.image.webURL !== undefined) { 
-    const i = this.state.hits.findIndex(hit => hit.webformatURL === this.image.webURL)
-      this.image.largeURL = this.state.hits[i].largeImageURL;
-      // this.image.webURL = "";
-      } else return
+    if (event.target.src) {
+      this.toggleModal()
+      const i = this.state.hits.findIndex(hit => hit.webformatURL === event.target.src)
+      this.largeURL = this.state.hits[i].largeImageURL;
+    } else return;
   };
 
 
@@ -132,9 +124,6 @@ export class ImageGallery extends Component {
 //* ================================ RENDER ==========================================================
   render() {
     const { hits, isLoading, showModal, showButton } = this.state
-    console.log("this.image.webURL: ", this.image.webURL);
-    console.log("this.image.largeURL: ", this.image.largeURL);
-
 
     return (
       < >
@@ -159,11 +148,10 @@ export class ImageGallery extends Component {
 
         {(hits[0] !== undefined && showButton) && <Button onClick={this.loadMore} />}
         
-
-        {(showModal && this.image.webURL) && (
+        {showModal && (
           <Modal onClose={this.toggleModal}>
             <img
-              src={this.image.largeURL}
+              src={this.largeURL}
               alt=""
             />
           </Modal>
