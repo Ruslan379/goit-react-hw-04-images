@@ -95,7 +95,8 @@ export class ImageGallery extends Component {
   loadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
-    }));
+      showButton: false,
+    })); 
   }
   
 

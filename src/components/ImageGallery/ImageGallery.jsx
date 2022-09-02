@@ -152,15 +152,22 @@ export function ImageGallery({ queryNew }) {
           console.log(error); //!
           toast.error(`Ошибка запроса: ${errorCatch}`, { position: "top-left", autoClose: 2000 } ); 
         });
-    }, 500);
+    }, 1000);
   }, [page, query, errorCatch]);
   
 
   
   //! Кнопка loadMore
   const loadMore = () => {
+    setShowButton(false); //! Кнопка LOAD MORE => ПРЯЧЕМ
     setPage(prevState => prevState + 1);
-    // this.setState(prevState => ({page: prevState.page + 1})); //?
+    
+
+    // this.setState(prevState => ({
+    //   page: prevState.page + 1,
+    //   showButton: false,
+    // })); //?
+
   }
   
 
