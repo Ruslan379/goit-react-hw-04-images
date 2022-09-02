@@ -1,5 +1,4 @@
-// import { Component } from 'react'; //?
-import { useState } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { ImSearch } from 'react-icons/im';
@@ -10,49 +9,44 @@ import css from 'components/Searchbar/Searchbar.module.css' //todo = стары�
 
 
 
-// export class Searchbar extends Component { //?
-export const Searchbar = ({ onSubmit }) => {
+export class Searchbar extends Component {
 
   // static propTypes = {
   //   onSubmit: PropTypes.func.isRequired,
   // };
 
-  //?
-  // state = {
-  //   query: '',
-  // };
 
+  state = {
+    query: '',
+  };
 
-  //! useState ===> query (аналог this.state.query)
-  const [query, setQuery] = useState('');
 
 //* ================================ МЕТОДЫ ==========================================================
   //! Запись в state значения поля инпут
-  const handleChange = event => {
+  handleChange = event => {
     // console.log("handleChange - event.currentTarget.value: ", event.currentTarget.value); //!
-    // this.setState({ query: event.currentTarget.value.toLowerCase() }); //?
-    setQuery(event.currentTarget.value.toLowerCase());
+
+    this.setState({ query: event.currentTarget.value.toLowerCase() });
   };
 
 
 
   //! Submi ФОРМЫ, провека на "", передача пропса this.state.query в App
-  const handleSubmit = event => {
+  handleSubmit = event => {
     event.preventDefault();
     // console.log("handleSubmit - event.target.elements.query.value: ", event.target.elements.query.value); //!
 
     //! Проверка на пустую строку в инпуте
+    // if (this.state.query.trim() === '') { //? или так, но не совсем правильно работает
     if (event.target.elements.query.value.trim() === '') {
       toast.error('Поле не должно быть пустым');
       event.target.reset()
       return;
     };
 
-    // console.log("handleSubmit - query: ", query); //!
-    //? ! Передача пропса this.state.query в App
-    //! Передача значения (query) в App
-    // this.props.onSubmit(this.state.query); //?
-    onSubmit(query); //?
+    // console.log("handleSubmit - this.state.query: ", this.state.query); //!
+    //! Передача пропса this.state.query в App
+    this.props.onSubmit(this.state.query);
 
     // this.setState ({query: ""});
     //! Очистка поля инпута
@@ -62,13 +56,12 @@ export const Searchbar = ({ onSubmit }) => {
 
 
 //* ================================ RENDER ==========================================================
-  // render() { //?
+  render() {
     return (
       <header className={css.Searchbar}>
         <form
           className={css.SearchForm}
-          // onSubmit={this.handleSubmit} //?
-          onSubmit={handleSubmit}
+          onSubmit={this.handleSubmit}
         >
           <button
             type="submit"
@@ -86,14 +79,13 @@ export const Searchbar = ({ onSubmit }) => {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            // onChange={this.handleChange} //?
-            onChange={handleChange}
+            onChange={this.handleChange}
           />     
         </form>  
       </header>
     );
   }
-// } //?
+}
 
 
 

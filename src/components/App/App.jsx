@@ -40,13 +40,9 @@ export class App extends Component {
 
         <ToastContainer autoClose={1500} theme={"colored"} />
         
-        <Searchbar
-          onSubmit={this.handleFormSubmit}
-        />
+        <Searchbar onSubmit={this.handleFormSubmit}/>
 
-        <ImageGallery
-          queryNew={query} 
-        />
+        <ImageGallery queryNew={query} />
         
       </div>
     );

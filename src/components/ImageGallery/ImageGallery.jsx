@@ -181,15 +181,15 @@ useEffect(() => {
       toggleModal()
       // const i = this.state.hits.findIndex(hit => hit.webformatURL === event.target.src)
       // this.largeURL = this.state.hits[i].largeImageURL;
-      console.log("event.target.src: ", event.target.src); //!
+      // console.log("event.target.src: ", event.target.src); //!
       const i = hits.findIndex(hit => hit.webformatURL === event.target.src)
       // largeURL = hits[i].largeImageURL; //?
       setLargeURL(hits[i].largeImageURL);
-      console.log("handleBackdropClick largeURL:",  largeURL); //!
+      // console.log("handleBackdropClick largeURL:",  largeURL); //!
     } else return;
   };
 
-  console.log("largeURL:",  largeURL); //!
+  // console.log("largeURL:",  largeURL); //!
 
 //? * ================================ RENDER ==========================================================
   // render() { //?
