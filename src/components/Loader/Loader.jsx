@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+
 
 import { Audio } from  'react-loader-spinner'
 
@@ -14,4 +14,3 @@ export const Loader = () => (
 
 
 
-// export default Filter;

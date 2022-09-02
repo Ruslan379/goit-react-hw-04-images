@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import css from 'components/ImageGalleryItem/ImageGalleryItem.module.css' //todo = старый вариант импорта стилей
+import css from 'components/ImageGalleryItem/ImageGalleryItem.module.css' 
 
 
 
@@ -11,7 +11,6 @@ export const ImageGalleryItem = ({ hits }) => (
           {hits.map(({ id, webformatURL, largeImageURL }) => (
             <li
               key={id}
-              // className="gallery-item"
               className={css.ImageGalleryItem}
             >
               <img
@@ -30,6 +29,3 @@ ImageGalleryItem.propTypes = {
   
 };
 
-
-
-// export default Filter;

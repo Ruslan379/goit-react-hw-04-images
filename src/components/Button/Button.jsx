@@ -22,5 +22,3 @@ Button.propTypes = {
 };
 
 
-
-// export default Filter;
