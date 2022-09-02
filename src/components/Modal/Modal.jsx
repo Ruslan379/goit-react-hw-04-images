@@ -1,5 +1,7 @@
-import React, { Component } from 'react'; //?
+// import React, { Component } from 'react'; //?
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+
 import PropTypes from 'prop-types';
 
 import css from 'components/Modal/Modal.module.css' //todo = старый вариант импорта стилей
@@ -10,54 +12,72 @@ const modalRoot = document.querySelector('#modal-root');
 
 
 
-export class Modal extends Component {
+// export class Modal extends Component { //?
+export function Modal({ children, onClose }) {
 //* ================================ МЕТОДЫ ==========================================================
-  componentDidMount() {
-    // console.log('Modal componentDidMount'); //!
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
+  //?
+  // componentDidMount() {
+  //   // console.log('Modal componentDidMount'); //!
+  //   window.addEventListener('keydown', this.handleKeyDown);
+  // }
+
+  //?
+  // componentWillUnmount() {
+  //   // console.log('Modal componentWillUnmount'); //!
+  //   window.removeEventListener('keydown', this.handleKeyDown);
+  // }
 
 
-  componentWillUnmount() {
-    // console.log('Modal componentWillUnmount'); //!
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
 
-  handleKeyDown = e => {
+
+  const handleKeyDown = e => {
     if (e.code === 'Escape') {
       // console.log('Нажали ESC, нужно закрыть модалку'); //!
-      this.props.onClose();
+      // this.props.onClose(); //?
+      onClose();
     }
   };
 
 
-  handleBackdropClick = event => {
+  const handleBackdropClick = event => {
     // console.log('Кликнули в бекдроп Modal'); //!
 
     // console.log('currentTarget: ', event.currentTarget); //!
     // console.log('target: ', event.target); //!
 
     if (event.currentTarget === event.target) {
-      this.props.onClose();
+      // this.props.onClose(); //?
+      onClose();
     }
   };
 
 
 //* ================================ RENDER ==========================================================
-  render() {
+  // render() { //?
     return createPortal(
       <div
         className={css.Overlay}
-        onClick={this.handleBackdropClick}>
+        // onClick={this.handleBackdropClick} //?
+        onClick={handleBackdropClick}
+      >
+        
           <div className={css.Modal}>
-            {this.props.children}
+          {/* {this.props.children} //? */}
+          {children}
           </div>
       </div>,
       modalRoot,
     );
   }
-}
+// } //?
 
 
 
