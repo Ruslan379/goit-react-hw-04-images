@@ -45,7 +45,7 @@ export class App extends Component {
         />
 
         <ImageGallery
-          query={query} 
+          queryNew={query} 
         />
         
       </div>
