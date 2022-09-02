@@ -68,6 +68,8 @@
 
 //! useState ===> **** (аналог this.state.****)
 
+//! useState ===> query (аналог this.state.query)
+
 //! Анализ [page, query] + ЗАПРОС
 
 //! Анализ props queryNew и запись его в query
@@ -82,6 +84,6 @@
 
 //! Первый рендер, если query - это пустая строка, то НЕ ДЕЛАЕМ HTTP-запрос
 
-//! Передача пропса this.state.query в App
+//! Передача значения (query) в App
 
 //! Проверка на пустую строку в инпуте
