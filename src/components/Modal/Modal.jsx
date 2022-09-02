@@ -27,14 +27,15 @@ export function Modal({ children, onClose }) {
   //   window.removeEventListener('keydown', this.handleKeyDown);
   // }
 
-
+  //!!! React Hook useEffect имеет отсутствующую зависимость: 'handleKeyDown'. 
+  //!!! Либо включите его, либо удалите массив зависимостей: }, []); 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }); 
 
 
 
