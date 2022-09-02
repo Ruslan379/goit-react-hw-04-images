@@ -11,7 +11,8 @@ import css from 'components/Searchbar/Searchbar.module.css' //todo = стары�
 
 
 // export class Searchbar extends Component { //?
-export const Searchbar = ({ onSubmit }) => {
+// export const Searchbar = ({ onSubmit }) => { //?
+export function Searchbar({ onSubmit }) {
 
   // static propTypes = {
   //   onSubmit: PropTypes.func.isRequired,

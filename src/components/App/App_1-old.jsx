@@ -1,5 +1,4 @@
-// import { Component } from 'react'; //?
-import { useState } from 'react';
+import { Component } from 'react';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,50 +10,41 @@ import css from 'components/App/App.module.css' //todo = старый вариа
 
 
 
-// export class App extends Component { //?
-// export const App = () => { //?
-export function App() {
+export class App extends Component {
 
-  //?
-  // state = {
-  //   query: '',
-  // };
+  state = {
+    query: '',
+  };
 
-  //! useState ===> query (аналог this.state.query)
-  const [query, setQuery] = useState('');
 
 //* ================================ МЕТОДЫ ==========================================================
   
   //! Передача пропса this.state.query из Searchbar
-  // handleFormSubmit = (query) => {
-  //   this.setState ({
-  //     page: 1,
-  //     query,
-  //   });
-  // };
-
-//! Принимаем (query ===> querySearchbar) из Searchbar
-  const handleFormSubmit = (querySearchbar) => {
-    setQuery(querySearchbar);
+  handleFormSubmit = (query) => {
+    this.setState ({
+      page: 1,
+      query,
+    });
   };
 
 
 
+
+
 //* ================================ RENDER ==========================================================
-  // render() { //?
-    // const { query } = this.state //?
+  render() {
+    const { query } = this.state
 
     return (
       <div className={css.App}>
 
         <ToastContainer autoClose={1500} theme={"colored"} />
         
-        {/* <Searchbar onSubmit={this.handleFormSubmit} /> //? */}
-        <Searchbar onSubmit={handleFormSubmit} />
+        <Searchbar onSubmit={this.handleFormSubmit}/>
 
         <ImageGallery queryNew={query} />
         
       </div>
     );
   }
-// } //?
+}

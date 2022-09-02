@@ -62,7 +62,7 @@ export function ImageGallery({ queryNew }) {
   //     prevState.query !== this.state.query
   //   ) {
   //     this.setState({ isLoading: true });
-  //     //! Делаем fetch-запрос с помощью services/pixabay-api.js
+  //     //? ! Делаем fetch-запрос с помощью services/pixabay-api.js
   //     setTimeout(() => {
   //     pixabayAPI
   //       .fetchPixabay(this.state.query, this.state.page)
@@ -82,15 +82,15 @@ export function ImageGallery({ queryNew }) {
   //               showButton: true
   //             }))
   //         };
-  //         //! endOfCollection - это цифра еще НЕ ПРОСМОТРЕННЫХ элементов коллекции
-  //         console.log("endOfCollection: ", endOfCollection); //!
+  //         //? ! endOfCollection - это цифра еще НЕ ПРОСМОТРЕННЫХ элементов коллекции
+  //         console.log("endOfCollection: ", endOfCollection); //? !
   //         if (endOfCollection <= 0) {
   //           toast.info('Вы достигли конца результатов поиска', { autoClose: 3000 } );
-  //           this.setState({ showButton: false });  //! Кнопка LOAD MORE => ПРЯЧЕМ
+  //           this.setState({ showButton: false });  //? ! Кнопка LOAD MORE => ПРЯЧЕМ
   //           return;
   //         }
   //       })
-  //       //! Обработка ошибок
+  //       //? ! Обработка ошибок
   //       .catch(error => {
   //         this.setState({ error, isLoading: false });
   //         console.log(error); //!
@@ -98,7 +98,7 @@ export function ImageGallery({ queryNew }) {
   //         toast.error(`Ошибка запроса: ${error}`, { position: "top-left", autoClose: 2000 } );
   //       });
   //     }, 500);
-  //     //! Передача пропса this.state в App
+  //     //? ! Передача пропса this.state в App
   //     // this.props.onSubmit(this.state);
   //   }
   // };
@@ -106,13 +106,12 @@ export function ImageGallery({ queryNew }) {
   
 
 
-  //! ==> ОСНОВНОЙ БЛОК. Анализ props и state + ЗАПРОС ==> 
-//! Анализ props queryNew и запись его в query
-useEffect(() => {
-  setPage(1);
-  setQuery(queryNew);
-  setHits([]);
-  }, [queryNew]);
+  //! Анализ props queryNew и запись его в query
+  useEffect(() => {
+    setPage(1);
+    setQuery(queryNew);
+    setHits([]);
+    }, [queryNew]);
 
 //! Анализ [page, query] + ЗАПРОС
   useEffect(() => {
@@ -124,7 +123,7 @@ useEffect(() => {
     setIsLoading(true);
 
     //! Делаем HTTP-запрос с помощью services/pixabay-api.js
-      setTimeout(() => { 
+    setTimeout(() => { 
       pixabayAPI
         .fetchPixabay(query, page)
         .then(({ hits, query, endOfCollection }) => {
@@ -153,11 +152,11 @@ useEffect(() => {
           console.log(error); //!
           toast.error(`Ошибка запроса: ${errorCatch}`, { position: "top-left", autoClose: 2000 } ); 
         });
-      }, 500);
-
+    }, 500);
   }, [page, query, errorCatch]);
   
 
+  
   //! Кнопка loadMore
   const loadMore = () => {
     setPage(prevState => prevState + 1);
