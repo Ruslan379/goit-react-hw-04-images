@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react'; 
 import PropTypes from 'prop-types';
 
 import { toast } from 'react-toastify';
 
 import pixabayAPI from 'services/pixabay-api.js';
-import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+// import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem'; //!
+import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem'; //! +++
 import { Loader } from 'components/Loader/Loader';
 import { Button } from 'components/Button/Button';
 import { Modal } from 'components/Modal/Modal';
@@ -13,7 +14,7 @@ import css from 'components/ImageGallery/ImageGallery.module.css'
 
 
 
-export function ImageGallery({ queryNew }) {
+export function ImageGallery({ queryNew }) { //*
   //! useState ===> **** (аналог this.state.****)
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
@@ -26,7 +27,7 @@ export function ImageGallery({ queryNew }) {
 
 
 
-  //! Анализ props queryNew и запись его в query
+  //! Анализ props { queryNew } и запись его в state (query)
   useEffect(() => {
     setPage(1);
     setQuery(queryNew);
@@ -34,8 +35,8 @@ export function ImageGallery({ queryNew }) {
     }, [queryNew]);
 
   
-//! Анализ [page, query] + ЗАПРОС
-  useEffect(() => {
+//! Анализ [page, query] + ЗАПРОС (было на useEffect)
+  useLayoutEffect(() => {
     //! Первый рендер, если query - это пустая строка, то НЕ ДЕЛАЕМ HTTP-запрос
     if (!query) {
       return;
@@ -139,56 +140,3 @@ export function ImageGallery({ queryNew }) {
 ImageGallery.propTypes = {
   query: PropTypes.string
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//! OLD --------------------------------------------------------------------------
-// import React from 'react';
-// import PropTypes from 'prop-types';
-
-// // import classNames from 'classnames';
-
-// // import 'components/ContactList/ContactList.css';
-// import css from 'components/ImageGallery/ImageGallery.module.css' //todo = старый вариант импорта стилей
-
-
-
-
-// export const ImageGallery = ({ hits }) => (
-//         <ul className={css.ImageGallery}>
-//           {hits.map(({ id, webformatURL, largeImageURL }) => (
-//             <li
-//               key={id}
-//               // className="gallery-item"
-//               className={css.ImageGalleryItem}
-//             >
-//               <img
-//                 className={css.ImageGalleryItemImage}
-//                 src={webformatURL}
-//                 alt=""
-//               />
-//           </li>
-//           ))}
-//         </ul>
-// );
-
-
-// ImageGallery.propTypes = {
-//   hits: PropTypes.array.isRequired,
-  
-// };
-
-
-
-// // export default Filter;

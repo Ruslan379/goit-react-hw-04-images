@@ -1,12 +1,13 @@
 import React from 'react';
+import { memo } from 'react'; //! +++
 import PropTypes from 'prop-types';
 
 import css from 'components/ImageGalleryItem/ImageGalleryItem.module.css' 
 
 
 
-
-export const ImageGalleryItem = ({ hits }) => (
+const ImageGalleryItem = ({ hits }) => (
+// export const ImageGalleryItem = ({ hits }) => (  //*
         <>
           {hits.map(({ id, webformatURL, largeImageURL }) => (
             <li
@@ -29,3 +30,7 @@ ImageGalleryItem.propTypes = {
   
 };
 
+//! Компонент ImageGalleryItem будет перерисовываться (перерендываться)
+//! только при изменении пропса { hits }
+export default memo(ImageGalleryItem); //! +++
+// export default React.memo(ImageGalleryItem); //! +++ или так, но без: import { memo } from 'react';
