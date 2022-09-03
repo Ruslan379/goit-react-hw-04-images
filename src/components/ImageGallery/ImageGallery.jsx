@@ -20,7 +20,7 @@ export function ImageGallery({ queryNew }) {
   const [query, setQuery] = useState('');
   const [hits, setHits] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [errorCatch, setErrorCatch] = useState(false);
+  const [error, setError] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showButton, setShowButton] = useState(true);
   const [largeURL, setLargeURL] = useState("");
@@ -42,6 +42,7 @@ export function ImageGallery({ queryNew }) {
       return;
     };
     setIsLoading(true);
+    setError(false);
     //! Делаем HTTP-запрос с помощью services/pixabay-api.js
     setTimeout(() => { 
       pixabayAPI
@@ -68,12 +69,12 @@ export function ImageGallery({ queryNew }) {
         //! Обработка ошибок
         .catch(error => {
           setIsLoading(false);
-          setErrorCatch(error);
-          console.log(error); //!
-          toast.error(`Ошибка запроса: ${errorCatch}`, { position: "top-left", autoClose: 2000 } ); 
-        });
+          setError(error.message);
+          console.log(error.message); //!
+          toast.error(`Ошибка запроса: ${error.message}`, { position: "top-center", autoClose: 2000 } ); 
+        })
     }, 1000);
-  }, [page, query, errorCatch]);
+  }, [page, query]);
   
 
   
@@ -104,10 +105,16 @@ export function ImageGallery({ queryNew }) {
 
     return (
       < >
+        {error && (
+          <div style={{ margin: '0 auto', color: 'red' }}>
+            <h1>Ошибка запроса:</h1>
+            <h2 style={{ textDecoration: "underline", fontStyle: 'italic', color: '#a10000' }}>!!! {error}</h2>
+          </div>
+        )}
+          
+
         {(hits[0] === undefined && isLoading === false) && (
-          <div
-            style={{ margin: '0 auto' }}
-          >
+          <div style={{ margin: '0 auto' }}>
             <h1>Введите тему</h1>
           </div>
         )}
