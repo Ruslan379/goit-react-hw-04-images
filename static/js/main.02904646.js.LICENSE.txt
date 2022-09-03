@@ -60,7 +60,7 @@
 
 //!
 
-//! OLD --------------------------------------------------------------------------
+//! +++
 
 //! endOfCollection - это цифра еще НЕ ПРОСМОТРЕННЫХ элементов коллекции
 
@@ -68,9 +68,9 @@
 
 //! useState ===> query (аналог this.state.query)
 
-//! Анализ [page, query] + ЗАПРОС
+//! Анализ [page, query] + ЗАПРОС (было на useEffect)
 
-//! Анализ props queryNew и запись его в query
+//! Анализ props { queryNew } и запись его в state (query)
 
 //! Делаем HTTP-запрос с помощью services/pixabay-api.js
 
