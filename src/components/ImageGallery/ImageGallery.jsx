@@ -47,16 +47,19 @@ export function ImageGallery({ queryNew }) {
     setTimeout(() => { 
       pixabayAPI
         .fetchPixabay(query, page)
-        .then(({ hits, query, endOfCollection }) => {
-          if (hits[0] === undefined) {  
+        .then(({ totalHits, hits, query, endOfCollection }) => { 
+          if (hits.length === 0) {  
             toast.warning(`Нет такой темы: ${query}`); 
             setHits([]);
             setIsLoading(false);
             return;
           } else {
-            setHits(prevState => [...prevState, ...hits]);
-            setIsLoading(false);
-            setShowButton(true);
+            if (page === 1) {
+              toast.success(`По вашей теме найдено ${totalHits} изображений`, { autoClose: 3000 });
+            };
+              setHits(prevState => [...prevState, ...hits]);
+              setIsLoading(false);
+              setShowButton(true);
             };
           //! endOfCollection - это цифра еще НЕ ПРОСМОТРЕННЫХ элементов коллекции
           console.log("endOfCollection: ", endOfCollection); //!
@@ -112,8 +115,7 @@ export function ImageGallery({ queryNew }) {
           </div>
         )}
           
-
-        {(hits[0] === undefined && isLoading === false) && (
+        {(hits.length === 0 && isLoading === false) && (
           <div style={{ margin: '0 auto' }}>
             <h1>Введите тему</h1>
           </div>
@@ -128,7 +130,7 @@ export function ImageGallery({ queryNew }) {
 
         {isLoading && <Loader />}
 
-        {(hits[0] !== undefined && showButton) && <Button onClick={loadMore} />}
+        {(hits.length !== 0 && showButton) && <Button onClick={loadMore} />}
 
         {showModal && (
           <Modal onClose={toggleModal}>

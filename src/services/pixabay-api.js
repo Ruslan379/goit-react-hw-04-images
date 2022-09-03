@@ -13,7 +13,7 @@ async function fetchPixabay(query, page) {
   const { totalHits, hits } = response.data;
   //! endOfCollection - это цифра еще НЕ ПРОСМОТРЕННЫХ элементов коллекции
   const endOfCollection = totalHits - page * per_page;
-  const all = { hits, query, endOfCollection };
+  const all = { totalHits, hits, query, endOfCollection };
   return all;
 }
 
