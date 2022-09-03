@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 import pixabayAPI from 'services/pixabay-api.js';
-// import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem'; //!
+
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem'; //! +++
 import { Loader } from 'components/Loader/Loader';
 import { Button } from 'components/Button/Button';
-import { Modal } from 'components/Modal/Modal';
+
 
 import css from 'components/ImageGallery/ImageGallery.module.css' 
 
@@ -21,9 +21,8 @@ export function ImageGallery({ queryNew }) {
   const [hits, setHits] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [showButton, setShowButton] = useState(true);
-  const [largeURL, setLargeURL] = useState("");
+
 
 
 
@@ -89,23 +88,6 @@ export function ImageGallery({ queryNew }) {
   
 
 
-  //! Инверсия showModal для открытия/закрытия МОДАЛКИ
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  }; 
-
-
-
-  //! Кликаем в картинку, ищем её largeImageURL, откываем МОДАЛКУ с картинкой
-  const handleBackdropClick = event => {
-    if (event.target.src) {
-      toggleModal()
-      const i = hits.findIndex(hit => hit.webformatURL === event.target.src)
-      setLargeURL(hits[i].largeImageURL);
-    } else return;
-  };
-
-
     return (
       < >
         {error && (
@@ -121,10 +103,7 @@ export function ImageGallery({ queryNew }) {
           </div>
         )}
         
-        <ul
-          className={css.ImageGallery}
-          onClick={handleBackdropClick}
-        >
+        <ul className={css.ImageGallery}>
           <ImageGalleryItem hits={hits} />
         </ul>
 
@@ -132,14 +111,6 @@ export function ImageGallery({ queryNew }) {
 
         {(hits.length !== 0 && showButton) && <Button onClick={loadMore} />}
 
-        {showModal && (
-          <Modal onClose={toggleModal}>
-            <img
-              src={largeURL}
-              alt=""
-            />
-          </Modal>
-        )}
       </>
     );
   }
