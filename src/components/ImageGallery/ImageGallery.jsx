@@ -14,7 +14,7 @@ import css from 'components/ImageGallery/ImageGallery.module.css'
 
 
 
-export function ImageGallery({ queryNew }) { //*
+export function ImageGallery({ queryNew }) { 
   //! useState ===> **** (аналог this.state.****)
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState('');
