@@ -14,25 +14,37 @@ const modalRoot = document.querySelector('#modal-root');
 
 export function Modal({ children, onClose }) {
 
-  //!!! React Hook useEffect имеет отсутствующую зависимость: 'handleKeyDown'. 
-  //!!! Либо включите его, либо удалите массив зависимостей: }, []); 
+   
   useEffect(() => {
+    //* Переносим handleKeyDown внутрь useEffect,
+    //*  чтобы не вносить в массив зависимостей:
+      //! React Hook useEffect имеет отсутствующую зависимость: 'handleKeyDown'. 
+      //! Либо включите его, либо удалите массив зависимостей: }, []);
+      
+    const handleKeyDown = event => {
+      if (event.code === 'Escape') {
+        onClose();
+      }
+    };
+    
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }); 
+  }, [onClose]); 
 
 
 
-  const handleKeyDown = event => {
-    if (event.code === 'Escape') {
-      onClose();
-    }
-  };
+  //* Переносим handleKeyDown внутрь useEffect
+  // const handleKeyDown = event => {
+  //   if (event.code === 'Escape') {
+  //     onClose();
+  //   }
+  // };
 
 
+  
   const handleBackdropClick = event => {
     if (event.currentTarget === event.target) {
       onClose();
