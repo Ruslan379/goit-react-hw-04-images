@@ -14,7 +14,6 @@ const modalRoot = document.querySelector('#modal-root');
 
 export function Modal({ children, onClose }) {
 
-   
   useEffect(() => {
     //* Переносим handleKeyDown внутрь useEffect,
     //*  чтобы не вносить в массив зависимостей:
@@ -35,7 +34,6 @@ export function Modal({ children, onClose }) {
   }, [onClose]); 
 
 
-
   //* Переносим handleKeyDown внутрь useEffect
   // const handleKeyDown = event => {
   //   if (event.code === 'Escape') {
@@ -44,7 +42,6 @@ export function Modal({ children, onClose }) {
   // };
 
 
-  
   const handleBackdropClick = event => {
     if (event.currentTarget === event.target) {
       onClose();
