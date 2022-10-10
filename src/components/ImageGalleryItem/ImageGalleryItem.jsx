@@ -17,7 +17,7 @@ import css from 'components/ImageGalleryItem/ImageGalleryItem.module.css'
 // export default memo(function ImageGalleryItem({ hits }) { //! ==> так не работают ImageGalleryItem.propTypes
 // const memo(ImageGalleryItem = ({ hits }) => (  //! + export default ImageGalleryItem; ==> так не работает ВООБЩЕ!!!
 
-const ImageGalleryItem = ({ hits }) => {  //* + export default memo(ImageGalleryItem); ==> так РАБОТАЕТ!!!
+const ImageGalleryItem = ({ hits, webformatURL }) => {  //* + export default memo(ImageGalleryItem); ==> так РАБОТАЕТ!!!
   
   //! useState ===> **** (аналог this.state.****)
   const [showModal, setShowModal] = useState(false);
@@ -46,19 +46,16 @@ const ImageGalleryItem = ({ hits }) => {  //* + export default memo(ImageGallery
   
   return (
     <>
-      {hits.map(({ id, webformatURL }) => (
-        <li
-          key={id}
-          className={css.ImageGalleryItem}
-          onClick={handleBackdropClick} 
-        >
-          <img
-            className={css.ImageGalleryItemImage}
-            src={webformatURL}
-            alt=""
-          />
-        </li>
-      ))}
+      <li className={css.ImageGalleryItem}
+        onClick={handleBackdropClick} 
+      >
+        <img
+          className={css.ImageGalleryItemImage}
+          src={webformatURL}
+          alt=""
+        />
+      </li>
+
       
       {showModal && ( 
             <Modal onClose={toggleModal}>

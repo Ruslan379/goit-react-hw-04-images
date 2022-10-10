@@ -103,9 +103,19 @@ export function ImageGallery({ queryNew }) {
           </div>
         )}
         
-        <ul className={css.ImageGallery}>
-          <ImageGalleryItem hits={hits} />
-        </ul>
+
+        {hits.length > 0 &&
+          (<ul className={css.ImageGallery}>
+            {hits.map(({ id, webformatURL }) => (
+              <ImageGalleryItem
+                key={id}
+                hits={hits}
+                webformatURL={webformatURL}
+              />
+            ))}
+          </ul>
+          )
+        }
 
         {isLoading && <Loader />}
 
