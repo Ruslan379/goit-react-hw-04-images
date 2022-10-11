@@ -52,18 +52,23 @@ export function ImageGallery({ queryNew }) {
             setHits([]);
             setIsLoading(false);
             return;
-          } else {
-            if (page === 1) {
-              toast.success(`По вашей теме найдено ${totalHits} изображений`, { autoClose: 3000 });
-            };
-              setHits(prevState => [...prevState, ...hits]);
-              setIsLoading(false);
-              setShowButton(true);
-            };
+          }
+
+          if (page === 1) {
+            toast.success(`По вашей теме найдено ${totalHits} изображений`, {
+              autoClose: 3000
+            });
+          };
+          setHits(prevState => [...prevState, ...hits]);
+          setIsLoading(false);
+          setShowButton(true);
+      
           //! endOfCollection - это цифра еще НЕ ПРОСМОТРЕННЫХ элементов коллекции
           console.log("endOfCollection: ", endOfCollection); //!
           if (endOfCollection <= 0) {
-            toast.info('Вы достигли конца результатов поиска', { autoClose: 3000 }); 
+            toast.info('Вы достигли конца результатов поиска', {
+              autoClose: 3000
+            }); 
             setShowButton(false); //! Кнопка LOAD MORE => ПРЯЧЕМ
             return;
           }
